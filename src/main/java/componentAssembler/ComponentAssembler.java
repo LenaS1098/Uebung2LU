@@ -36,8 +36,8 @@ public class ComponentAssembler {
         int input = scanner.nextInt();
         switch (input){
             case 1:
-                System.out.println("Component 1 ausgewaehlt");
-                addComponent("Component 1");
+                System.out.println("Component Counter ausgewaehlt");
+                addComponent("F:\\Lena\\HBRS\\OOKA\\uebung\\git\\ComponentA\\out\\artifacts\\ComponentA_jar\\ComponentA.jar");
                 break;
             case 2:
                 System.out.println("Component 2 ausgewaehlt");

@@ -12,44 +12,65 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class Component implements iComponent {
+public class Component implements iComponent, Runnable {
 
     private int id;
+    private Thread thread;
 
     String className;
     URLClassLoader classLoader;
     String jarName ="";
-    Boolean isRunning = false;
 
     public Component(int id, String pathToJar) {
         this.id = id;
         jarName = pathToJar;
+        try{
+            loadComponent(pathToJar);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
+    @Override
+    public void run() {
+        System.out.println(jarName +" is running in background");
+        while(!thread.isInterrupted()){
+
+        }
+
+        System.out.println(jarName + " has ended");
+    }
+
     public void loadComponent(String pathToJar) throws IOException, ClassNotFoundException {
+        
         System.out.println("Component Loaded");
     }
 
 
     @Override
     public void start() {
-        isRunning = true;
-        System.out.println("Component Started");
+            thread = new Thread(this,"jarName");
+            thread.start();
     }
 
     @Override
     public void end() {
-        isRunning = false;
-        System.out.println("Component Ended");
+        thread.interrupt();
     }
 
     @Override
     public String getState() {
-        if(isRunning){
-            return "RUNNING";
+        if(thread!=null){
+            if(thread.isAlive()){
+                return "RUNNING";
+            }
+            else{
+                return "ASLEEP";
+            }
         }else{
-            return "ASLEEP";
+            return "LOADED";
         }
 
     }
@@ -68,6 +89,7 @@ public class Component implements iComponent {
     public void setId(int id) {
         this.id = id;
     }
+
 
    /* //Quelle: https://stackoverflow.com/questions/11016092/how-to-load-classes-at-runtime-from-a-folder-or-jar
      public void loadComponent(String pathToJar) throws IOException, ClassNotFoundException {

@@ -7,6 +7,7 @@ import component.iComponent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 
 public class Laufzeitumgebung {
@@ -39,13 +40,12 @@ public class Laufzeitumgebung {
         }else{
             System.out.println("Keine Komponenten in LU");
         }
-        // TODO: 27.04.2022 ; int als return zur Kontrolle
+
     }
 
 
     //add einer Komponente aus lokalem Verzeichnis
     public void addComponent(String pathToJar) {
-
 
         Component c = new Component(componentList.size()+1,pathToJar);
         try{
@@ -56,12 +56,11 @@ public class Laufzeitumgebung {
             e.printStackTrace();
         }
 
-
     }
 
     //Component aus LU wird gestartet
     public void startComponent(int componentId){
-        iComponent component = getComponentById(componentId);
+        Component component = getComponentById(componentId);
         component.start();
 
     }
@@ -74,9 +73,10 @@ public class Laufzeitumgebung {
 
     // Component wird aus LU entfernt
     public void deleteComponent(int componentId){
-        iComponent component = getComponentById(componentId);
-        componentList.remove(component);
-
+        Component component = getComponentById(componentId);
+        if(!Objects.equals(component.getState(), "RUNNING")){
+            componentList.remove(component);
+        }
     }
 
     //Status aller Compenents in LU
@@ -92,8 +92,8 @@ public class Laufzeitumgebung {
         stateOutput(componentId,component.getName(), component.getState());
     }
 
-    private iComponent getComponentById(int id){
-        for( iComponent component: componentList){
+    private Component getComponentById(int id){
+        for( Component component: componentList){
             if(component.getId()==id){
                 return component;
             }
@@ -106,4 +106,6 @@ public class Laufzeitumgebung {
     private void stateOutput(int id, String name, String state){
         System.out.println("Component: " +id+ " Name: " + name+ " State: "+state);
     }
+
+
 }
