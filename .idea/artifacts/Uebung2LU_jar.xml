@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Uebung2LU:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Uebung2LU_jar</output-path>
+    <root id="archive" name="Uebung2LU.jar">
+      <element id="module-output" name="Uebung2LU" />
+      <element id="module-test-output" name="Uebung2LU" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

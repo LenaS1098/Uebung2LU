@@ -44,7 +44,7 @@ public class Component implements iComponent, Runnable {
     }
 
     public void loadComponent(String pathToJar) throws IOException, ClassNotFoundException {
-        
+
         System.out.println("Component Loaded");
     }
 
@@ -91,6 +91,7 @@ public class Component implements iComponent, Runnable {
     }
 
 
+    //Code mit ClassLoader, noch nicht lauffaehig
    /* //Quelle: https://stackoverflow.com/questions/11016092/how-to-load-classes-at-runtime-from-a-folder-or-jar
      public void loadComponent(String pathToJar) throws IOException, ClassNotFoundException {
         JarFile jarFile = new JarFile(pathToJar);
